@@ -16,9 +16,13 @@ refs.searchCountry.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY))
 function onSearch (e) {
     refs.countryInfo.innerHTML = '';
     refs.countryList.innerHTML = '';
-    const searchLetter = e.target.value;
-    console.log(searchLetter)
-
+    const searchLetter = e.target.value;  
+    const value = e.target.value;
+      if (value.trim('') === '') {
+      return;
+      }
+  
+  console.log(searchLetter)
     API.fetchCountries(searchLetter)
     .then(renderCountryCard)
     .catch(error => console.log(error))
@@ -35,8 +39,7 @@ function renderCountryCard (countries){
         Notiflix.Notify.failure('Oops, there is no country with that name');
       }
       else if (countries.length >= 2 && countries.length <= 10) {
-        refs.countryList.insertAdjacentHTML('afterbegin', renderCountryList(countries));
-       
-      } 
+        refs.countryList.insertAdjacentHTML('afterbegin', renderCountryList(countries));       
+      }      
 
 }
