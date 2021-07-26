@@ -2,13 +2,13 @@ import './sass/main.scss';
 import API from './js/fetchCountries';
 import countryCard from './template/countryCard.hbs';
 import renderCountryList from './template/renderCountryList.hbs';
-import getRefs from './js/getRefs';
+import {getRefs} from './js/getRefs';
 import Notiflix from "notiflix";
 
 
 const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
-const refs = getRefs;
+const refs = getRefs();
 
 refs.searchCountry.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
@@ -17,7 +17,7 @@ function onSearch (e) {
     refs.countryInfo.innerHTML = '';
     refs.countryList.innerHTML = '';
     const searchLetter = e.target.value;  
-    const value = e.target.value;
+    const value = e.target.value
       if (value.trim('') === '') {
       return;
       }
@@ -43,3 +43,4 @@ function renderCountryCard (countries){
       }      
 
 }
+
